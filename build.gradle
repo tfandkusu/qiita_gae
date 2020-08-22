@@ -7,10 +7,20 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    // 追加
+    jcenter()
 }
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    // ktorのバージョン
+    def ktor_version = '1.4.0'
+    // ローカルテストサーバ起動
+    implementation "io.ktor:ktor-server-netty:$ktor_version"
+    // サーブレットを作る
+    implementation "io.ktor:ktor-server-servlet:$ktor_version"
+    // HTMLをKotlinでレンダリングする
+    implementation "io.ktor:ktor-html-builder:$ktor_version"
 }
 
 compileKotlin {
@@ -19,3 +29,6 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
+
+apply plugin: 'application'
+mainClassName = 'io.ktor.server.netty.EngineMain'
